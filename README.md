@@ -1,1 +1,0 @@
-# lumen-jwt-demo
