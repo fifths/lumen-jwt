@@ -27,9 +27,6 @@ $app->withFacades();
 
 $app->withEloquent();
 
-// jwt config
-$app->configure('jwt');
-
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -71,7 +68,6 @@ $app->singleton(
 // ]);
 
 $app->routeMiddleware([
-    'auth' => App\Http\Middleware\Authenticate::class,
     'cors' => App\Http\Middleware\CorsMiddleware::class
 ]);
 
@@ -99,11 +95,6 @@ $app->register(App\Providers\AuthServiceProvider::class);
 // auth
 $app['Dingo\Api\Auth\Auth']->extend('jwt', function ($app) {
     return new Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);
-});
-
-// Injecting auth
-$app->singleton(Illuminate\Auth\AuthManager::class, function ($app) {
-    return $app->make('auth');
 });
 
 /*

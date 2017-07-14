@@ -18,13 +18,14 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
 
     protected $table = 'users';
 
+    // protected $guard = ['email', 'password'];
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email'
+        'name', 'email', 'password'
     ];
 
     /**
