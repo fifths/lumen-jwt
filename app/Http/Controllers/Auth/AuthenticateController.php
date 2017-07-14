@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
-use Tymon\JWTAuth\Exceptions\JWTException;
+
 use Tymon\JWTAuth\JWTAuth;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Tymon\JWTAuth\Exceptions\JWTException;
+
 
 class AuthenticateController extends BaseController
 {
@@ -20,12 +24,12 @@ class AuthenticateController extends BaseController
     public function authenticate(Request $request)
     {
         $this->validate($request, [
-            'email'    => 'required|email|max:255',
+            'email' => 'required|email|max:255',
             'password' => 'required',
         ]);
 
         try {
-            if (! $token = $this->jwt->attempt($request->only('email', 'password'))) {
+            if (!$token = $this->jwt->attempt($request->only('email', 'password'))) {
                 return response()->json(['user_not_found'], 404);
             }
         } catch (TokenExpiredException $e) {

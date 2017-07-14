@@ -75,12 +75,6 @@ $app->routeMiddleware([
     'cors' => App\Http\Middleware\CorsMiddleware::class
 ]);
 
-// dingo/api
-$app->register(Dingo\Api\Provider\LumenServiceProvider::class);
-
-// jwt
-$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
-
 
 /*
 |--------------------------------------------------------------------------
@@ -93,10 +87,19 @@ $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 |
 */
 
-$app->register(App\Providers\AppServiceProvider::class);
+// dingo/api
+$app->register(Dingo\Api\Provider\LumenServiceProvider::class);
+// jwt
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
+
+// $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
+// auth
+$app['Dingo\Api\Auth\Auth']->extend('jwt', function ($app) {
+    return new Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);
+});
 
 // Injecting auth
 $app->singleton(Illuminate\Auth\AuthManager::class, function ($app) {

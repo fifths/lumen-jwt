@@ -33,7 +33,7 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
      * @var array
      */
     protected $hidden = [
-        'password'
+        'password', 'remember_token', 'deleted_at'
     ];
 
     /**
