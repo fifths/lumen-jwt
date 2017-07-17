@@ -37,7 +37,12 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1', 'middleware' 
     $api->group(['middleware' => 'api.auth'], function ($api) {
         // User
         // my detail
-        $api->get('user', ['as' => 'user.show', 'uses' => 'UserController@showMe']);
+        $api->get('user', ['as' => 'user.show', 'uses' => 'UserController@show']);
+        // update info
+        $api->patch('user', ['as' => 'users.update', 'uses' => 'UserController@patch']);
+        // edit password
+        $api->put('user/password', ['as' => 'user.edit.password', 'uses' => 'UserController@editPassword']);
+
 
         // Post
         $api->get('/posts', 'PostController@index');
