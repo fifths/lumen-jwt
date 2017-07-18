@@ -2,7 +2,7 @@
 $api = app('Dingo\Api\Routing\Router');
 // $api = $app->make(Dingo\Api\Routing\Router::class);
 
-$api->version(['v1', 'v2'], ['namespace' => 'App\Http\Controllers\Auth', 'middleware' => ['cors']], function ($api) {
+$api->version(['v1', 'v2'], ['namespace' => 'App\Http\Controllers\Auth'], function ($api) {
 
     // register
     $api->post('register', 'AuthenticateController@register');
@@ -25,7 +25,7 @@ $api->version(['v1', 'v2'], ['namespace' => 'App\Http\Controllers\Auth', 'middle
 
 // v1
 // header    Accept:application/vnd.lumen.v1+json
-$api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1', 'middleware' => ['cors']], function ($api) {
+$api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($api) {
 
     // test
     $api->get('test', function () {
@@ -53,7 +53,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1', 'middleware' 
 
 // v2
 // header    Accept:application/vnd.lumen.v2+json
-$api->version('v2', ['namespace' => 'App\Http\Controllers\Api\V1', 'middleware' => ['cors']], function ($api) {
+$api->version('v2', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($api) {
     // test
     $api->get('test', function () {
         $data = ['msg' => 'this is v2 api'];
