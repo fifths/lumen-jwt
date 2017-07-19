@@ -25,7 +25,8 @@ class PostController extends BaseController
      */
     public function index()
     {
-        return response()->json(Post::paginate());
+        $post = Post::where('user_id', $this->user()->id)->paginate();
+        return response()->json($post);
     }
 
     /**

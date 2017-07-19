@@ -45,9 +45,9 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
 
 
         // Post
-        $api->get('/posts', 'PostController@index');
-        $api->post('/posts', 'PostController@create');
-        $api->put('/posts/{postId}', 'PostController@update');
+        $api->get('/post', 'PostController@index');
+        $api->post('/post', 'PostController@create');
+        $api->put('/post/{postId}', 'PostController@update');
     });
 });
 
