@@ -2,7 +2,7 @@
 
 
 ## What's Added
-- [Lumen 5.4](https://github.com/laravel/lumen/tree/v5.4.0)
+- [Lumen 5.5](https://github.com/laravel/lumen/tree/v5.5.0)
 - [JWT Auth](https://github.com/tymondesigns/jwt-auth)
 - [Dingo](https://github.com/dingo/api)
 
@@ -23,6 +23,7 @@ To authenticate a user
 Request:
 
 ```sh
+curl -X POST -F 'name=user1' -F 'email=user1@example.com' -F 'password=1234' http://localhost:8090/api/register
 curl -X POST -F 'email=user1@example.com' -F 'password=1234' http://localhost:8090/api/login
 ```
 

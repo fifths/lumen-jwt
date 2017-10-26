@@ -1,26 +1,20 @@
 <?php
-
 namespace App\Http\Controllers\Api\V1;
-
 use App\Http\Controllers\BaseController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\JWTAuth;
-
 class UserController extends BaseController
 {
     protected $auth;
-
     public function __construct(JWTAuth $auth)
     {
         $this->auth = $auth;
     }
-
     public function show()
     {
         return $this->user();
     }
-
     public function patch(Request $request)
     {
         $rules = [
@@ -34,7 +28,6 @@ class UserController extends BaseController
         }
         return response()->json(compact('user'));
     }
-
     public function editPassword(Request $request)
     {
         $rules = [

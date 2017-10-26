@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
-
 use App\Http\Controllers\BaseController;
 use App\Models\User;
 use Illuminate\Hashing\BcryptHasher;
@@ -10,17 +8,13 @@ use Tymon\JWTAuth\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
-
 class AuthenticateController extends BaseController
 {
-
     protected $auth;
-
     public function __construct(JWTAuth $auth)
     {
         $this->auth = $auth;
     }
-
     public function register(Request $request)
     {
         $this->validate($request, [
@@ -36,7 +30,6 @@ class AuthenticateController extends BaseController
         $token = $this->auth->fromUser($user);
         return response()->json(compact('token'));
     }
-
     public function authenticate(Request $request)
     {
         $this->validate($request, [
@@ -44,6 +37,7 @@ class AuthenticateController extends BaseController
             'password' => 'required|string|min:4'
         ]);
         $credentials = $request->only('email', 'password');
+        // return $credentials;
         try {
             if (!$token = $this->auth->attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 401);
@@ -54,7 +48,6 @@ class AuthenticateController extends BaseController
         $user = User::where('email', $credentials['email'])->first();
         return ['user' => $user, 'token' => $token];
     }
-
     public function getAuthenticatedUser()
     {
         try {
@@ -71,19 +64,16 @@ class AuthenticateController extends BaseController
         // the token is valid and we have found the user via the sub claim
         return response()->json(compact('user'));
     }
-
     public function refreshToken(Request $request)
     {
         $token = $this->auth->refresh();
         return ['token' => $token];
     }
-
     public function deleteToken(Request $request)
     {
         $this->auth->refresh();
         return ['token' => ''];
     }
-
     public function getCurrentToken()
     {
         // Token

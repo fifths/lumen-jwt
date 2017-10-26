@@ -1,20 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: fifths
- * Date: 17-7-13
- * Time: 下午4:58
- */
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 class Post extends Model
 {
     use SoftDeletes;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -23,14 +14,12 @@ class Post extends Model
     protected $fillable = [
         'title', 'content'
     ];
-
     /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
     protected $hidden = [];
-
     /**
      * Get the user that owns the post.
      */

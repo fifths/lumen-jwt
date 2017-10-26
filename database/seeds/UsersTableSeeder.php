@@ -1,7 +1,5 @@
 <?php
-
 use Illuminate\Database\Seeder;
-
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -15,12 +13,10 @@ class UsersTableSeeder extends Seeder
             'email' => 'user1@example.com',
             'password' => app('hash')->make('1234')
         ]);
-
         factory(App\Models\User::class)->create([
             'email' => 'user2@example.com',
             'password' => app('hash')->make('1234')
         ]);
-
         factory(App\Models\User::class)->create([
             'email' => 'user3@example.com',
             'password' => app('hash')->make('1234')

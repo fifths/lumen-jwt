@@ -10,23 +10,20 @@
   "type": "project",
   "require": {
     "php": ">=5.6.4",
-    "laravel/lumen-framework": "5.4.*",
+    "laravel/lumen-framework": "5.5.*",
     "vlucas/phpdotenv": "~2.2",
-    "tymon/jwt-auth": "1.0.0-beta.3",
-    "dingo/api": "v1.0.0-beta8"
+    "dingo/api": "v2.0.0-alpha1",
+    "tymon/jwt-auth": "1.0.0-rc.1"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
-    "phpunit/phpunit": "~5.0",
+    "phpunit/phpunit": "~6.0",
     "mockery/mockery": "~0.9"
   },
   "autoload": {
     "psr-4": {
       "App\\": "app/"
-    },
-    "files": [
-      "app/helpers.php"
-    ]
+    }
   },
   "autoload-dev": {
     "classmap": [
@@ -41,6 +38,7 @@
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
+  "optimize-autoloader": true,
   "repositories": {
     "packagist": {
       "type": "composer",

@@ -1,9 +1,6 @@
 <?php
-
 namespace App\Http\Middleware;
-
 use Symfony\Component\HttpFoundation\Response;
-
 class CorsMiddleware
 {
     public function handle($request, \Closure $next)
@@ -16,7 +13,6 @@ class CorsMiddleware
             'Access-Control-Max-Age' => '86400',
             'Access-Control-Allow-Headers' => $request->header('Access-Control-Request-Headers')
         ];
-
         if ($request->isMethod('OPTIONS')) {
             return response(null, 200, $headers);
         }
