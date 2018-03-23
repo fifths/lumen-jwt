@@ -9,8 +9,16 @@ class BaseController extends Controller
 {
     use Helpers;
 
-    public function error($validator)
+    public function error($errcode, $errmsg)
     {
-        return $validator->errors();
+        return response()->json([
+            'errcode' => $errcode,
+            'errmsg' => $errmsg
+        ], 401);
+    }
+
+    public function errorValidator($errcode = 40001, $validator)
+    {
+        return $this->error($errcode, $validator->errors());
     }
 }
