@@ -6,7 +6,8 @@ $api = app('Dingo\Api\Routing\Router');
 
 // header  Accept:application/vnd.lumen.v1+json
 $api->version('v1', [
-    'namespace' => 'App\Http\Controllers\Api\V1'
+    'namespace' => 'App\Http\Controllers\Api\V1',
+    'middleware' => ['cors']
 ], function ($api) {
     // test
     $api->get('test', 'TestController@test');
