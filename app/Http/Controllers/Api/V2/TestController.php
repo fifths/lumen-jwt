@@ -6,6 +6,6 @@ class TestController extends BaseController
 {
     public function test()
     {
-        echo 'v2';
+        return response()->json(['api_version' => 'v2']);
     }
 }

@@ -27,7 +27,7 @@ class User extends Model implements AuthenticatableContract, JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password', 'deleted_at'
     ];
 
 
@@ -41,5 +41,13 @@ class User extends Model implements AuthenticatableContract, JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    /**
+     * Get the posts for the user.
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 }

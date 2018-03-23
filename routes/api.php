@@ -52,6 +52,43 @@ $api->version('v1', [
         ]);
     });
 
+    // need authentication
+    $api->group([
+        'middleware' => 'api.auth'
+    ], function ($api) {
+        // User
+        // my detail
+        $api->get('user', [
+            'as' => 'user.show',
+            'uses' => 'UserController@show'
+        ]);
+        // update info
+        $api->patch('user', [
+            'as' => 'users.update',
+            'uses' => 'UserController@patch'
+        ]);
+        // edit password
+        $api->put('user/password', [
+            'as' => 'user.edit.password',
+            'uses' => 'UserController@editPassword'
+        ]);
+
+        // Post
+        $api->get('/post', [
+            'as' => 'post.index',
+            'uses' => 'PostController@index'
+        ]);
+
+        $api->post('/post', [
+            'as' => 'post.create',
+            'uses' => 'PostController@create'
+        ]);
+
+        $api->put('/post/{postId}', [
+            'as' => 'post.update',
+            'uses' => 'PostController@update'
+        ]);
+    });
 
 });
 
