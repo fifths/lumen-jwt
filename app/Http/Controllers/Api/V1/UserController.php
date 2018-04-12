@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends BaseController
 {
 
+    public function __construct()
+    {
+        $this->middleware('api.auth');
+    }
+
     public function show()
     {
         return $this->user();

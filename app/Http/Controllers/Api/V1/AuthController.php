@@ -13,7 +13,7 @@ class AuthController extends BaseController
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('api.auth', ['except' => ['login', 'register']]);
     }
 
     public function register(Request $request)

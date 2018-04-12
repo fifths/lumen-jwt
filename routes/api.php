@@ -34,7 +34,7 @@ $api->version('v1', [
         ]);
 
         // me
-        $api->post('me', [
+        $api->get('me', [
             'as' => 'authorize.me',
             'uses' => 'AuthController@me',
         ]);
@@ -54,7 +54,7 @@ $api->version('v1', [
 
     // need authentication
     $api->group([
-        'middleware' => 'api.auth'
+        // 'middleware' => 'api.auth'
     ], function ($api) {
         // User
         // my detail
@@ -73,21 +73,9 @@ $api->version('v1', [
             'uses' => 'UserController@editPassword'
         ]);
 
-        // Post
-        $api->get('/post', [
-            'as' => 'post.index',
-            'uses' => 'PostController@index'
-        ]);
-
-        $api->post('/post', [
-            'as' => 'post.create',
-            'uses' => 'PostController@create'
-        ]);
-
-        $api->put('/post/{postId}', [
-            'as' => 'post.update',
-            'uses' => 'PostController@update'
-        ]);
+        // RESTful
+        $api->resource('/user', 'UserController');
+        $api->resource('/post', 'PostController');
     });
 
 });

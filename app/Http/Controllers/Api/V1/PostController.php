@@ -9,11 +9,21 @@ use Illuminate\Support\Facades\Request;
 
 class PostController extends BaseController
 {
+
+    public function __construct()
+    {
+        $this->middleware('api.auth');
+    }
+
     /**
-     * Return whole list of posts
-     * No authorization required
+     * @api {get} /post Request Post information
+     * @apiName GetPost
+     * @apiGroup Post
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @apiParam {Number} page page number.
+     *
+     * @apiSuccess {String} title
+     * @apiSuccess {String} content
      */
     public function index()
     {
@@ -21,13 +31,14 @@ class PostController extends BaseController
         return response()->json($post);
     }
 
-    /**
-     * Create new post
-     * Only if the Posts' policy allows it
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function create()
+    public function show($post_id)
+    {
+        $post = Post::find($post_id);
+        $this->authorize('view', $post);
+        return response()->json($post);
+    }
+
+    public function store()
     {
         $rules = array(
             'title' => 'required|string',
@@ -42,24 +53,24 @@ class PostController extends BaseController
         return response()->json($post);
     }
 
-    /**
-     * Update post
-     * Only if the Posts' policy allows it
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function update($post_id)
     {
         $rules = array(
-            'title' => 'required|string',
-            'content' => 'required|string',
+            'title' => 'string',
+            'content' => 'string',
         );
         $this->validate(Request::instance(), $rules);
         $post = Post::find($post_id);
         $this->authorize('update', $post);
         try {
-            $post->title = Input::get('title');
-            $post->content = Input::get('content');
+            $title = Input::get('title');
+            if (!empty($title)) {
+                $post->title = $title;
+            }
+            $content = Input::get('content');
+            if (!empty($content)) {
+                $post->content = $content;
+            }
             $post->save();
             return response()->json($post);
         } catch (\Exception $e) {
@@ -68,5 +79,13 @@ class PostController extends BaseController
                 'error' => $e->getMessage()
             ], 400);
         }
+    }
+
+    public function destroy($post_id)
+    {
+        $post = Post::find($post_id);
+        $this->authorize('delete', $post);
+        $rs = $post->delete();
+        return response()->json($rs);
     }
 }
