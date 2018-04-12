@@ -74,7 +74,6 @@ $api->version('v1', [
         ]);
 
         // RESTful
-        $api->resource('/user', 'UserController');
         $api->resource('/post', 'PostController');
     });
 
